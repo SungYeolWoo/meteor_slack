@@ -2,22 +2,27 @@
 
 > Source : http://slides.com/timbrandin/meteor-slack#/
 
-### STEP-2 : Home Route
+### STEP-3 : Channel Route
 
-Create a home route in routes.js : 
+Create a channel route in routes.js: 
 ```javascript
-Router.map(function (){
-  this.route('home', {
-    path: '/'
+Router.map(function () {
+  ...
+  
+  this.route('channel', {
+    path : '/channel/:_id'
   });
 });
 ```
-Create a template for home listing:
+
+Create a template for a channel listing messages:
 ```html
-<template name="home">
+<template name="channel">
   <ul>
-    {{#each channels}}
-      <li>{{name}}</li>
+    {{#each messages}}
+    <li>
+      {{message}}
+    </li>
     {{/each}}
   </ul>
 </template>
