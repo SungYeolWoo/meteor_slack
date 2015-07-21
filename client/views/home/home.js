@@ -1,6 +1,12 @@
 /**
  * Created by ProgrammingPearls on 15. 7. 21..
  */
+Template.home.helpers({
+  channels: function () {
+    return Channels.find();
+  }
+});
+
 Template.home.events({
   'submit form' : function(event, instance) {
     event.preventDefault();

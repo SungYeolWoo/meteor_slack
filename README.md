@@ -2,22 +2,34 @@
 
 > Source : http://slides.com/timbrandin/meteor-slack#/
 
-### STEP-5 : CHANNEL SWITCHING
+### STEP-6 : SHOWING CHANNELS
 
-Create a link to a channel from home (client/views/home/home.html): 
+Add a helper to show (find) all channels in home (client/views/home/home.js): 
 ```javascript
-  ...
-  {{#each channels}}
-      <li><a href="/channel/{{_id}}">{{name}}</a></li>
-  {{/each}}
+  Template.home.helpers({
+    channels: function () {
+      return Channels.find();
+    }
+  });
+  
+  Template.home.events({
   ...
 ```
 
-Add the links to the channels in a channel (client/views/channel/channel.html):  
+Show the channel name in the channel (../channel/channel.js, ../channel/channel.html):  
+```javascript
+Template.channel.helpers({
+  channel : function () {
+    var _id = Router.current().params._id;
+    return Channels.findOne({_id: _id});
+  }
+});
+```
+
 ```html
 <template name="channel">
+  <h1>{{channel.name}}</h1>
+  <ul>
   ...
-  </ul>
-  {{>home}}
 </template>
 ```
