@@ -2,19 +2,23 @@
 
 > Source : http://slides.com/timbrandin/meteor-slack#/
 
-### STEP-1
+### STEP-2 : Home Route
 
-Remove Files: 
+Create a home route in routes.js : 
+```javascript
+Router.map(function (){
+  this.route('home', {
+    path: '/'
+  });
+});
 ```
-meteor-slack.js, meteor-slack.html and meteor-slack.css
-```
-Create Folder:
-```
-lib/
-client/ (for the browser only)
-client/views/
-client/views/home/
-client/views/channel/
-server/ (for the server only)
-public/ (graphics, fonts, icons etc.)
+Create a template for home listing:
+```html
+<template name="home">
+  <ul>
+    {{#each channels}}
+      <li>{{name}}</li>
+    {{/each}}
+  </ul>
+</template>
 ```
