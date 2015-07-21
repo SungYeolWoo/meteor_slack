@@ -2,36 +2,22 @@
 
 > Source : http://slides.com/timbrandin/meteor-slack#/
 
-### STEP-4 : Adding Channels
+### STEP-5 : CHANNEL SWITCHING
 
-Create a 'channels' Mongo collection: 
+Create a link to a channel from home (client/views/home/home.html): 
 ```javascript
-Channels = new Mongo.Collection('channels');
+  ...
+  {{#each channels}}
+      <li><a href="/channel/{{_id}}">{{name}}</a></li>
+  {{/each}}
+  ...
 ```
 
-Add a form to input new channels to home 
+Add the links to the channels in a channel (client/views/channel/channel.html):  
 ```html
-<template name="home">
-  <form>
-    <label for="name">Channel name:</label>
-    <input type="text" id="name"/>
-    <button type="submit">Add</button>
-  </form>
-  <ul>
-    ...
+<template name="channel">
+  ...
   </ul>
+  {{>home}}
 </template>
-```
-
-Create an event handler that insert a channel
-```javascript
-Template.home.events({
-  'submit form' : function(event, instance) {
-    event.preventDefault();
-    var name = instance.find('input').value;
-    instance.find('input').value = '';
-    
-    Channels.insert({name: name});
-  }
-});
 ```
