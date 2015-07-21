@@ -2,17 +2,19 @@
 
 > Source : http://slides.com/timbrandin/meteor-slack#/
 
-#### AGENDA
-1. Install Meteor (1.1.0.2)
-1. Introduction + Frequent Issues
-1. Setup
-1. Iron Router + Templates + Forms + Collections
-1. Accounts + Time (Moment.js)
-1. Publications
-1. Subscriptions
-1. Security
-1. Iron Layouts + SASS preprocessing + Styling
-1. Add your own style
+### STEP-1
 
-#### INTRODUCTION
-- Learn about Templates (Blaze), Iron Router and Publications and Subscriptions
+Remove Files: 
+```
+meteor-slack.js, meteor-slack.html and meteor-slack.css
+```
+Create Folder:
+```
+lib/
+client/ (for the browser only)
+client/views/
+client/views/home/
+client/views/channel/
+server/ (for the server only)
+public/ (graphics, fonts, icons etc.)
+```
