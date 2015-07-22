@@ -6,5 +6,9 @@
 
 Create a publication for 'messages' for a channel (lib/messages.js):
 ```javascript
-
+if (Meteor.isServer) {
+  Meteor.publish('messages', function (channel) {
+    return Messages.find({_channel: channel});
+  });
+}
 ```
