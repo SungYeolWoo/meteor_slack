@@ -12,5 +12,34 @@ meteor add fourseven:scss
 Create some styles, i.e. let aside be 220px fixed to the left and header 53px fixed at the top, and footer fixed to the bottom.
 
 client/css/styles.scss:
+```css
+$aside: 220px;
+$top: 53px;
 
-client/css/styles.scss:
+header,
+aside,
+footer {
+  position: fixed;
+}
+
+header {
+  top: 0;
+  height: $top;
+  margin-left: $aside;
+}
+
+aside {
+  top: $top;
+  width: $aside;
+}
+
+article {
+  margin-left: $aside;
+}
+
+footer {
+  position: fixed;
+  bottom: 0;
+  margin-left: $aside;
+}
+```
