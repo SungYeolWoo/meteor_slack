@@ -2,18 +2,40 @@
 
 > Source : http://slides.com/timbrandin/meteor-slack#/
 
-### STEP-18 : SHOW USERNAMES
+### STEP-19 : INPUT INSECURITY
 
-Subscribe to messages for a channel in the channel template (client/views/channel/channel.js):
+Remove the insecure package
+```
+meteor remove insecure
+```
+Allow logged in users to only insert channels and messages.
+
+lib/channels.js:
 ```javascript
-Template.channel.onCreated(function () {
-  var instance = this;
-  // Listen for changes to reactive variables (such as Router.current())
-  instance.autorun(function () {
-    var channel = Router.current().params._id;
-    instance.subscribe('messages', channel);
+if (Meteor.isServer) {
+  Channels.allow({
+    insert: function (userId, doc) {
+      if (userId) {
+        return true;
+      }
+    }
   });
-});
+  
+  Meteor.publish('channels', function () {
+  ...
+```
 
-Template.channel.helpers({
+lib/messages.js:
+```javascript
+if (Meteor.isServer) {
+  Messages.allow({
+    insert: function (userId, doc) {
+      if (userId && doc._channel) {
+        return true;
+      }
+    }
+  });
+
+  Meteor.publish('messages', function (channel) {
+  ...
 ```
