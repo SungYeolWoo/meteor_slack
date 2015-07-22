@@ -2,22 +2,9 @@
 
 > Source : http://slides.com/timbrandin/meteor-slack#/
 
-### STEP-13 : PUBLISH CHANNELS
+### STEP-14 : PUBLISH MESSAGES
 
-
-Remove autopublish (we don't want to publish everything always):
-```
-meteor remove autopublish
-```
-
-Create a publication for 'channels' and publish all channels (lib/channels.js):
+Create a publication for 'messages' for a channel (lib/messages.js):
 ```javascript
-Channels = new Mongo.Collection('channels');
-
-if (Meteor.isServer) {
-  Meteor.publish('channels', function () {
-    return Channels.find();
-  });
-}
 
 ```
