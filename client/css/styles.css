@@ -1,0 +1,23 @@
+header,
+aside,
+footer {
+  position: fixed; }
+
+header {
+  top: 0;
+  height: 53px;
+  margin-left: 220px; }
+
+aside {
+  top: 53px;
+  width: 220px; }
+
+article {
+  margin-left: 220px; }
+
+footer {
+  position: fixed;
+  bottom: 0;
+  margin-left: 220px; }
+
+/*# sourceMappingURL=styles.css.map */

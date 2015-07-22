@@ -2,52 +2,15 @@
 
 > Source : http://slides.com/timbrandin/meteor-slack#/
 
-### STEP-21 : CONTENT FOR
+### STEP-22 : SASS STYLES
 
-Move content into yields, i.e. the title should go in the header, messageForm in the footer and channels in aside.
-
-client/views/home/home.html:
-```html
-<template name="home">
-  {{#contentFor 'aside'}}
-  <form>
-    ...
-  {{> loginButtons}}
-  {{/contentFor}}
-</template>
+Add a SASS/SCSS preprocessor:
+```
+meteor add fourseven:scss
 ```
 
-../channel/channel.js:
-```javascript
-...
-});
+Create some styles, i.e. let aside be 220px fixed to the left and header 53px fixed at the top, and footer fixed to the bottom.
 
-// We've moved the message form into a new template
-// (messageForm), now we need to move the event map.
-Template.channel.events({
-  ...
-```
+client/css/styles.scss:
 
-../channel/channel.html:
-```html
-<template name="channel">
-  {{#contentFor 'header'}}
-  <h1>{{channel.name}}</h1>
-  <ul>
-    {{#each messages}}
-    ...
-  {{/contentFor}}
-
-  {{#contentFor 'footer'}}
-    {{> messageForm}}
-  {{/contentFor}}
-
-  {{>home}}
-</template>
-
-<template name="messageForm">
-  <form>
-    <textarea cols="100" rows="1"></textarea>
-  </form>
-</template>
-```
+client/css/styles.scss:
