@@ -1,6 +1,4 @@
-/**
- * Created by ProgrammingPearls on 15. 7. 22..
- */
+/** Created by ProgrammingPearls on 15. 7. 22.. ...*/
 
 Template.channel.onCreated(function () {
   var instance = this;
