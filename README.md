@@ -24,7 +24,7 @@ client/views/home/home.html:
 
 // We've moved the message form into a new template
 // (messageForm), now we need to move the event map.
-Template.channel.events({
+Template.messageForm.events({
   ...
 ```
 
