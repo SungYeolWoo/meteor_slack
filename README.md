@@ -2,40 +2,37 @@
 
 > Source : http://slides.com/timbrandin/meteor-slack#/
 
-### STEP-19 : INPUT INSECURITY
+### STEP-20 : ADDING LAYOUTS
 
-Remove the insecure package
-```
-meteor remove insecure
-```
-Allow logged in users to only insert channels and messages.
+Add a layout with a yield for header, body, footer and aside and set it as default in the router.
 
-lib/channels.js:
+client/layouts/layout.html:
+```html
+<template name="layout">
+  <header>
+    {{> yield "header"}}
+  </header>
+
+  <aside>
+    {{> yield "aside"}}
+  </aside>
+
+  <article>
+    {{> yield}}
+  </article>
+
+  <footer>
+    {{> yield "footer"}}
+  </footer>
+</template>
+```
+
+lib/routes.js:
 ```javascript
-if (Meteor.isServer) {
-  Channels.allow({
-    insert: function (userId, doc) {
-      if (userId) {
-        return true;
-      }
-    }
-  });
-  
-  Meteor.publish('channels', function () {
-  ...
-```
+Router.configure({
+  layoutTemplate : 'layout'
+});
 
-lib/messages.js:
-```javascript
-if (Meteor.isServer) {
-  Messages.allow({
-    insert: function (userId, doc) {
-      if (userId && doc._channel) {
-        return true;
-      }
-    }
-  });
-
-  Meteor.publish('messages', function (channel) {
-  ...
+Router.map(function () {
+...
 ```
