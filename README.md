@@ -2,37 +2,52 @@
 
 > Source : http://slides.com/timbrandin/meteor-slack#/
 
-### STEP-20 : ADDING LAYOUTS
+### STEP-21 : CONTENT FOR
 
-Add a layout with a yield for header, body, footer and aside and set it as default in the router.
+Move content into yields, i.e. the title should go in the header, messageForm in the footer and channels in aside.
 
-client/layouts/layout.html:
+client/views/home/home.html:
 ```html
-<template name="layout">
-  <header>
-    {{> yield "header"}}
-  </header>
-
-  <aside>
-    {{> yield "aside"}}
-  </aside>
-
-  <article>
-    {{> yield}}
-  </article>
-
-  <footer>
-    {{> yield "footer"}}
-  </footer>
+<template name="home">
+  {{#contentFor 'aside'}}
+  <form>
+    ...
+  {{> loginButtons}}
+  {{/contentFor}}
 </template>
 ```
 
-lib/routes.js:
+../channel/channel.js:
 ```javascript
-Router.configure({
-  layoutTemplate : 'layout'
+...
 });
 
-Router.map(function () {
-...
+// We've moved the message form into a new template
+// (messageForm), now we need to move the event map.
+Template.channel.events({
+  ...
+```
+
+../channel/channel.html:
+```html
+<template name="channel">
+  {{#contentFor 'header'}}
+  <h1>{{channel.name}}</h1>
+  <ul>
+    {{#each messages}}
+    ...
+  {{/contentFor}}
+
+  {{#contentFor 'footer'}}
+    {{> messageForm}}
+  {{/contentFor}}
+
+  {{>home}}
+</template>
+
+<template name="messageForm">
+  <form>
+    <textarea cols="100" rows="1"></textarea>
+  </form>
+</template>
 ```
