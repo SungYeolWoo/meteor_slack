@@ -9,3 +9,6 @@ Create a subscription to the 'channels' publication in the home template (client
 Template.home.onCreated(function () {
   this.subscribe('channels');
 });
+
+Template.home.helpers({
+```
