@@ -2,42 +2,42 @@
 
 > Source : http://slides.com/timbrandin/meteor-slack#/
 
-### STEP-11 : ADDING TIME
+### STEP-12 : SPLIT BY DAY
 
 
-Add a timestamp to each message (client/views/channel/channel.js):
-```javascript
-        ...
-        Messages.insert({
-          _channel:_id,
-          message: value,
-          _userId: Meteor.userId(),  // Add userId to each message
-          timestamp: new Date() // Add a timestamp to each message
-        });
-      }
-    }
-  });
-```
 
-Show the time in nice formatting, i.e. "16:19 PM":
-```
-meteor add momentjs:moment
-```
+Create a helper to tell what date it is, but only print the date if it differs from the last printed date (use [Template.instance()](http://docs.meteor.com/#/full/template_instance))
+
 client/views/channel/channel.js:
 ```javascript
   ...
   },
-  time: function () {
-    return (this.timestamp ? moment(this.timestamp).format('H:mm A') : false);
+  date: function () {
+    var dateNow = moment(this.timestamp).calendar();
+    var instance = Template.instance();
+
+    if (!instance.date || instance.date != dateNow) {
+      return instance.date = dateNow;
+    }
   }
 });
 ```
+
 client/views/channel/channel.html:
 ```html
   ...
-  <li>
-    <div>{{user.emails.[0].address}} {{time}}</div>
-    {{#markdown}}{{message}}{{/markdown}}
-  </li>
+  {{#each messages}}
+  <h2>{{date}}</h2>
   ...
+```
+
+And [localize](http://momentjs.com/docs/#/customization/calendar/) it to show 'today' or 'yesterday' (lib/moment.js):
+```javascript
+moment.locale('en', {
+  calendar: {
+    lastDay: '[Yesterday]',
+    sameDay: '[Today]',
+    sameElse: 'MMMM Do, YYYY'
+  }
+});
 ```

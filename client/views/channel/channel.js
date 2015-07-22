@@ -15,6 +15,14 @@ Template.channel.helpers({
   },
   time: function () {
     return (this.timestamp ? moment(this.timestamp).format('H:mm A') : false);
+  },
+  date: function () {
+    var dateNow = moment(this.timestamp).calendar();
+    var instance = Template.instance();
+
+    if (!instance.date || instance.date != dateNow) {
+      return instance.date = dateNow;
+    }
   }
 });
 
