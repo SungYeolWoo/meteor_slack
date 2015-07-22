@@ -1,6 +1,16 @@
 /**
  * Created by ProgrammingPearls on 15. 7. 22..
  */
+
+Template.channel.onCreated(function () {
+  var instance = this;
+  // Listen for changes to reactive variables (such as Router.current())
+  instance.autorun(function () {
+    var channel = Router.current().params._id;
+    instance.subscribe('messages', channel);
+  });
+});
+
 Template.channel.helpers({
   messages: function () {
     var _id = Router.current().params._id;

@@ -2,13 +2,18 @@
 
 > Source : http://slides.com/timbrandin/meteor-slack#/
 
-### STEP-16 : SUBSCRIBE TO CHANNELS
+### STEP-17 : SUBSCRIBE TO MESSAGES
 
-Create a subscription to the 'channels' publication in the home template (client/views/home/home.js):
+Subscribe to messages for a channel in the channel template (client/views/channel/channel.js):
 ```javascript
-Template.home.onCreated(function () {
-  this.subscribe('channels');
+Template.channel.onCreated(function () {
+  var instance = this;
+  // Listen for changes to reactive variables (such as Router.current())
+  instance.autorun(function () {
+    var channel = Router.current().params._id;
+    instance.subscribe('messages', channel);
+  });
 });
 
-Template.home.helpers({
+Template.channel.helpers({
 ```
