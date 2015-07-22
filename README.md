@@ -36,6 +36,7 @@ Template.messageForm.events({
   <ul>
     {{#each messages}}
     ...
+  </ul>
   {{/contentFor}}
 
   {{#contentFor 'footer'}}
