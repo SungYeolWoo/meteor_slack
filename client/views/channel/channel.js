@@ -36,7 +36,8 @@ Template.channel.helpers({
 
 // We've moved the message form into a new template
 // (messageForm), now we need to move the event map.
-Template.channel.events({
+
+Template.messageForm.events({
   'keyup textarea': function (event, instance) {
     if (event.keyCode == 13 && !event.shift) { // Check if enter was pressed (but without shift).
       var _id = Router.current().params._id;
