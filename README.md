@@ -2,49 +2,24 @@
 
 > Source : http://slides.com/timbrandin/meteor-slack#/
 
-### STEP-8 : SHOWING MESSAGES
+### STEP-9 : ADDING USERS
 
 
-Add a helper that finds messages for the current channel (client/views/channel/channel.js):
-```javascript
-Template.channel.helpers({
-  messages: function () {
-    var _id = Router.current().params._id;
-    return Messages.find({_channel: _id});
-  },
-  channel : function () {
-  ...
+Enable login with password to your application:
+```
+meteor add accounts-password
 ```
 
-Let's add **markdown** to enable rendering of newlines and paragraphs (more) in messages :
+Now add login buttons:
 ```
-meteor add markdown
+meteor add accounts-ui
 ```
 
-../channel/channel.html:
- 
+client/views/home/home.html
 ```html
-<template name="channel">
-  <h1>{{channel.name}}</h1>
-  <ul>
-    {{#each messages}}
-    <li>
-      {{#markdown}}{{message}}{{/markdown}}
-    </li>
   ...
+    {{/each}}
+  </ul>
+  {{> loginButtons}}
+</template>
 ```
-
-../channel/channel.js:
-
-```javascript
-      ...
-      var value = instance.find('textarea').value;
-      // Markdown requires double spaces at the end of the line to force line-breaks.
-      value = value.replace("\n", "  \n");
-      instance.find('textarea').value = ''; // Clear the textarea
-      Messages.insert({_channel:_id, message: value});
-    }
-  }
-});
-```
-
