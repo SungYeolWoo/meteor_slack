@@ -2,7 +2,7 @@
 
 > Source : http://slides.com/timbrandin/meteor-slack#/
 
-### STEP-17 : SUBSCRIBE TO MESSAGES
+### STEP-18 : SHOW USERNAMES
 
 Subscribe to messages for a channel in the channel template (client/views/channel/channel.js):
 ```javascript
