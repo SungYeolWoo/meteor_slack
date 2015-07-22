@@ -2,7 +2,7 @@
 
 > Source : http://slides.com/timbrandin/meteor-slack#/
 
-### STEP-6 : SHOWING CHANNELS
+### STEP-7 : ADDING MESSAGES
 
 
 Create a 'messages' Mongo collection (lib/messages.js):
