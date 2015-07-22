@@ -2,27 +2,10 @@
 
 > Source : http://slides.com/timbrandin/meteor-slack#/
 
-### STEP-15 : PUBLISH USERNAMES
+### STEP-16 : SUBSCRIBE TO CHANNELS
 
-Add a username field to the sign-up form (lib/accounts.js):
+Create a subscription to the 'channels' publication in the home template (client/views/home/home.js):
 ```javascript
-if (Meteor.isClient){
-  Accounts.ui.config({
-    passwordSignupFields: 'USERNAME_AND_EMAIL'
-  });
-}
-```
-Create a publication for 'allUserNames' but only send the username to logged in users (lib/accounts.js):
-```javascript
-...
-}
-else {
-  Meteor.publish('allUserNames', function () {
-    if (this.userId) {
-      return Meteor.users.find({}, {fields: {'profile.username': 1}});
-    }
-  });
-}
-```
-
-
+Template.home.onCreated(function () {
+  this.subscribe('channels');
+});
