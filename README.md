@@ -2,42 +2,42 @@
 
 > Source : http://slides.com/timbrandin/meteor-slack#/
 
-### STEP-10 : WHO TYPED WHAT
+### STEP-11 : ADDING TIME
 
 
-Add a reference to the user on a message:
+Add a timestamp to each message (client/views/channel/channel.js):
 ```javascript
-  ...
-  instance.find('textarea').value = ''; // Clear the textarea
-    Messages.insert({
-      _channel:_id,
-      message: value,
-      _userId: Meteor.userId()  // Add userId to each message
-    });
-  }
-  ...
+        ...
+        Messages.insert({
+          _channel:_id,
+          message: value,
+          _userId: Meteor.userId(),  // Add userId to each message
+          timestamp: new Date() // Add a timestamp to each message
+        });
+      }
+    }
+  });
 ```
 
-Create a helper and show the username (just show the email for now)
-
+Show the time in nice formatting, i.e. "16:19 PM":
+```
+meteor add momentjs:moment
+```
 client/views/channel/channel.js:
 ```javascript
   ...
-    return Channels.findOne({_id: _id});
   },
-  user: function () {
-    return Meteor.users.findOne({_id: this._userId});
+  time: function () {
+    return (this.timestamp ? moment(this.timestamp).format('H:mm A') : false);
   }
 });
 ```
-
-../channel/channel.html:
+client/views/channel/channel.html:
 ```html
-    ...
-    <li>
-      <div>{{user.emails.[0].address}}</div>
-      {{#markdown}}{{message}}{{/markdown}}
-    </li>
-    {{/each}}
-    ...
+  ...
+  <li>
+    <div>{{user.emails.[0].address}} {{time}}</div>
+    {{#markdown}}{{message}}{{/markdown}}
+  </li>
+  ...
 ```

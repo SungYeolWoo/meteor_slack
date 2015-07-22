@@ -12,6 +12,9 @@ Template.channel.helpers({
   },
   user: function () {
     return Meteor.users.findOne({_id: this._userId});
+  },
+  time: function () {
+    return (this.timestamp ? moment(this.timestamp).format('H:mm A') : false);
   }
 });
 
@@ -26,7 +29,8 @@ Template.channel.events({
       Messages.insert({
         _channel:_id,
         message: value,
-        _userId: Meteor.userId()  // Add userId to each message
+        _userId: Meteor.userId(),  // Add userId to each message
+        timestamp: new Date() // Add a timestamp to each message
       });
     }
   }
