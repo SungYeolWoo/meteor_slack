@@ -1,3 +1,6 @@
+body {
+  margin: 0; }
+
 header,
 aside,
 footer {
@@ -6,18 +9,12 @@ footer {
 header {
   top: 0;
   height: 53px;
-  margin-left: 220px; }
-
-aside {
-  top: 53px;
-  width: 220px; }
-
-article {
-  margin-left: 220px; }
-
-footer {
-  position: fixed;
-  bottom: 0;
-  margin-left: 220px; }
+  margin-left: 220px;
+  background: white;
+  width: 100%; }
+  header h1 {
+    padding: 0 16px;
+    margin: 0;
+    line-height: 53px; }
 
 /*# sourceMappingURL=styles.css.map */
