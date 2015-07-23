@@ -25,6 +25,7 @@ Clone the repository:
 
 Checkout the final step
 > cd meteor_slack
+
 > git checkout step-24 
 
 Run meteor
