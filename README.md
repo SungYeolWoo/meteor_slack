@@ -21,12 +21,17 @@
 ## Getting the final branch
 
 Clone the repository:
-> git clone https://github.com/SungYeolWoo/meteor_slack.git
+```
+git clone https://github.com/SungYeolWoo/meteor_slack.git
+```
 
 Checkout the final step
-> cd meteor_slack
-
-> git checkout step-24 
+```
+cd meteor_slack
+git checkout step-24 
+```
 
 Run meteor
-> meteor
+```
+meteor
+```
