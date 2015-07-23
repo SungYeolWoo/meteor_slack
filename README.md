@@ -2,6 +2,8 @@
 
 > Source : http://slides.com/timbrandin/meteor-slack#/
 
+> Demo : http://edgar_meteor_slack.meteor.com/
+
 #### AGENDA
 1. Install Meteor (1.1.0.2)
 1. Introduction + Frequent Issues
